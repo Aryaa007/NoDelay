@@ -2,11 +2,22 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
 import numpy as np
+from fastapi.middleware.cors import CORSMiddleware
+
 
 model = joblib.load("delay_model.pkl")
 encoder = joblib.load("time_encoder.pkl")
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can restrict this to ["http://127.0.0.1:5500"] for safety
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 #input structure
 class DeliveryInput(BaseModel):
