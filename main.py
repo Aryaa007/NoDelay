@@ -3,13 +3,12 @@ from pydantic import BaseModel
 import joblib
 import numpy as np
 
-# Load model & encoder
 model = joblib.load("delay_model.pkl")
 encoder = joblib.load("time_encoder.pkl")
 
 app = FastAPI()
 
-# Define the input structure
+#input structure
 class DeliveryInput(BaseModel):
     Distance_km: float
     Delivery_Speed: float
