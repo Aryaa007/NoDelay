@@ -19,6 +19,14 @@ class DeliveryInput(BaseModel):
     Weekday: int
     Time_of_Day: str
 
+
+@app.get("/")
+def home():
+    return {
+        "message": "🚚 NoDelay API is running! Visit /docs to use the delay prediction endpoint."
+    }
+
+
 @app.post("/predict_delay")
 def predict_delay(data: DeliveryInput):
     # Encode time_of_day
