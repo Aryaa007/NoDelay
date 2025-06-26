@@ -3,13 +3,10 @@ document.getElementById('predictBtn').addEventListener('click', predictDelay);
 async function predictDelay() {
   const formData = {
     Distance_km: parseFloat(document.getElementById('distance').value),
-    Delivery_Speed: parseFloat(document.getElementById('speed').value),
     Agent_Rating: parseFloat(document.getElementById('rating').value),
-    Agent_Efficiency: parseFloat(document.getElementById('efficiency').value),
     Traffic_Level: parseInt(document.getElementById('traffic').value),
     Weather_Impact: parseInt(document.getElementById('weather').value),
     Weekday: parseInt(document.getElementById('weekday').value),
-    Time_of_Day: document.getElementById('time').value
   };
 
   document.getElementById('loadingIndicator').style.display = 'flex';
@@ -24,6 +21,7 @@ async function predictDelay() {
       body: JSON.stringify(formData)
     });
 
+
     if (!response.ok) throw new Error('Network response was not ok');
     const result = await response.json();
 
@@ -35,6 +33,22 @@ async function predictDelay() {
       : `<span class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg text-lg font-semibold">
           ✅ On Time — ${Math.round(result.probability_of_delay * 100)}% safe
          </span>`;
+
+        document.getElementById("predictBtn").addEventListener("click", (e) => {
+  const distance = parseFloat(document.getElementById("distance").value);
+  const rating = parseFloat(document.getElementById("rating").value);
+
+  if (distance < 0.1 || distance > 50) {
+    alert("Distance must be between 0.1 and 100 km.");
+    e.preventDefault();
+    return;
+  }
+  if (rating < 1 || rating > 5) {
+    alert("Agent Rating must be between 1.0 and 5.0.");
+    e.preventDefault();
+    return;
+  }
+});
 
     document.getElementById('resultContainer').style.display = 'block';
 
