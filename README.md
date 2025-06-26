@@ -2,10 +2,6 @@
 
 ![nodelay](ss.png)
 
----
-
-## About nodelay.ai
-
 `nodelay.ai` is a blazing-fast, ML-powered delivery delay prediction system that tells you **exactly** when your delivery is going to screw up — before it even thinks about it.  
 Built with **FastAPI**, **Three.js**, and a custom-trained ML model, this isn’t just a logistics tool.  
 It’s your oracle in a chaotic world of traffic jams and thunderstorms.
